@@ -1,4 +1,4 @@
-package me.alexandreh.fr.mananaheul.Chat;
+package me.alexandreh.fr.mananaheul.chat;
 
 import net.md_5.bungee.api.ChatColor;
 
