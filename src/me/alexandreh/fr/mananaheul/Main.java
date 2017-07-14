@@ -1,7 +1,8 @@
 package me.alexandreh.fr.mananaheul;
 
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import me.alexandreh.fr.mananaheul.commands.ManaCommand;
 
 
 public class Main extends JavaPlugin {
@@ -12,7 +13,6 @@ public class Main extends JavaPlugin {
 		regListeners();
 		registerCommands();
 	    }
-
 	@Override
 	public void onDisable(){
 		getLogger().info("Plugin off");
@@ -23,7 +23,7 @@ public class Main extends JavaPlugin {
 	}
 	
 	public void registerCommands(){
-		// getCommand("mana").setExecutor(new ManaCommand());
+		getCommand("mana").setExecutor(new ManaCommand());
 	}
 	
 }
