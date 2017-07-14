@@ -9,7 +9,12 @@ import org.bukkit.Bukkit;
 import net.md_5.bungee.api.ChatColor;
 
 public class Secret {
-
+	  private static String host = "";
+	  private static String port = "3306";
+	  private static String database = "";
+	  private static String username = "test";
+	  private static String password = "";
+	  private static Connection db;
 
 	  
 	  public static Connection getDB()
