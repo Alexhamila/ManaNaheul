@@ -2,6 +2,7 @@ package me.alexandreh.fr.mananaheul.commands;
 import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,6 +10,8 @@ import org.bukkit.entity.Player;
 
 import me.alexandreh.fr.mananaheul.Main;
 import me.alexandreh.fr.mananaheul.chat.Prefix;
+import me.alexandreh.fr.mananaheul.levels.LvlRetriever;
+import me.alexandreh.fr.mananaheul.levels.ManabyLvl;
 import me.alexandreh.fr.mananaheul.utils.IntegerCheck;
 import net.md_5.bungee.api.ChatColor;
 
@@ -36,7 +39,14 @@ public class ManaCommand implements CommandExecutor{
 				}
 			}else
 				if(args.length == 1){
-					sender.sendMessage("Mauvaise formulation de la commande.");
+					for(OfflinePlayer p : Main.mana.keySet()){
+						try {
+							Bukkit.broadcastMessage(p.getName() + " / " + Main.mana.get(p) + " / " + ManabyLvl.getLvlbyManaConverter(p) + " = " + LvlRetriever.GetPlayerLvl(p));
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+					//sender.sendMessage("Mauvaise formulation de la commande.");
 				}
 				if(args.length == 2){
 					sender.sendMessage("Mauvaise formulation de la commande.");

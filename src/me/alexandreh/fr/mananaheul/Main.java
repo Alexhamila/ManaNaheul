@@ -37,7 +37,7 @@ public class Main extends JavaPlugin {
 		e.printStackTrace();
 		Bukkit.getLogger().warning("Connection failed !");	
 		}
-		}
+	    }
 	
 	@Override
 	public void onDisable(){

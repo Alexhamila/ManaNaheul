@@ -9,6 +9,7 @@ import me.alexandreh.fr.mananaheul.Main;
 import me.alexandreh.fr.mananaheul.levels.ManabyLvl;
 
 public class Console {
+	
 	public static void RemoveMana(CommandSender s, Player p, int remove_mana) throws SQLException{
 		int p_mana = GetMana(p);
 		if(p_mana >= remove_mana){

@@ -1,5 +1,6 @@
 package me.alexandreh.fr.mananaheul.levels;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import me.alexandreh.fr.mananaheul.mysql.Secret;
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
 
 public class LvlRetriever {
 
-	public static int GetPlayerLvl(Player p) throws SQLException{
+	public static int GetPlayerLvl(OfflinePlayer p) throws SQLException{
 		
 		PreparedStatement ps = Secret.getDB().prepareStatement("SELECT lvl FROM nclevels WHERE player = '"  + p.getName() + "';");
 		ps.executeQuery();

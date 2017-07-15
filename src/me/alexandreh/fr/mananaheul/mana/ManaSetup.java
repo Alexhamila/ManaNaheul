@@ -8,13 +8,17 @@ import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.craftbukkit.v1_11_R1.CraftOfflinePlayer;
+import org.bukkit.craftbukkit.v1_11_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import me.alexandreh.fr.mananaheul.Main;
+import me.alexandreh.fr.mananaheul.levels.LvlRetriever;
 import me.alexandreh.fr.mananaheul.levels.ManabyLvl;
 import me.alexandreh.fr.mananaheul.mysql.Secret;
 
@@ -23,10 +27,21 @@ public class ManaSetup implements Listener{
 	@EventHandler(priority=EventPriority.HIGH)
 	public void onPlayerJoinEvent(PlayerJoinEvent e) throws SQLException{
 		Player p = e.getPlayer();
-		if(Main.mana.containsKey(p) != true){
-			Main.mana.put(p, ManabyLvl.getMaxMana(p));
+		if(Main.mana.containsKey(Bukkit.getOfflinePlayer(p.getUniqueId())) == false){
+		Main.mana.put(Bukkit.getOfflinePlayer(p.getUniqueId()), ManabyLvl.getMaxMana(p));
 		}
+		if(Main.mana.containsKey(Bukkit.getOfflinePlayer(p.getUniqueId()))){
+			ManabyLvl.setPlayerMax(p);
+		}
+		XpBar.setBar(p);
 	}
+	
+	@EventHandler(priority=EventPriority.LOW)
+	public void onPlayerLeaveEvent(PlayerQuitEvent e){
+		Player p = e.getPlayer();
+		XpBar.removeBar(p);
+	}
+
 	
 	public static void RetrievePlayerMana() throws SQLException{
 		

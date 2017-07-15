@@ -1,12 +1,18 @@
 package me.alexandreh.fr.mananaheul.levels;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+
+import me.alexandreh.fr.mananaheul.Main;
+import me.alexandreh.fr.mananaheul.mysql.Secret;
 
 public interface ManabyLvl {
 
-	public static int getMaxMana(Player p) throws SQLException{
+	public static int getMaxMana(OfflinePlayer p) throws SQLException{
 		
 		int lvl = LvlRetriever.GetPlayerLvl(p);
 		
@@ -60,4 +66,131 @@ public interface ManabyLvl {
 		
 	}
 	
-}
+	public static int getLvlbyMana(OfflinePlayer p) throws SQLException{
+		
+		int mana = Main.mana.get(p);
+		
+		switch(mana){
+		
+		case 0:
+			return 0;
+		case 10:
+			return 1;
+		case 15:
+			return 2;
+		case 20:
+			return 3;
+		case 25:
+			return 4;
+		case 30: 
+			return 5;
+		case 35:
+			return 6;
+		case 40: 
+			return 7;
+		case 45: 
+			return 8;
+		case 50:
+			return 9;
+		case 55: 
+			return 10;
+		case 60:
+			return 11;
+		case 65:
+			return 12;
+		case 70:
+			return 13;
+		case 75:
+			return 14;
+		case 80:
+			return 15;
+		case 85:
+			return 16;
+		case 90:
+			return 17;
+		case 95:
+			return 18;
+		case 100:
+			return 19;
+		case 105:
+			return 20;
+		default:
+			return 0;
+		}
+		
+	}
+	
+	public static int getLvlbyManaConverter(OfflinePlayer p) throws SQLException{
+		
+		int mana = ManabyLvl.getPlayerMax(p);
+		
+		switch(mana){
+		
+		case 0:
+			return 0;
+		case 10:
+			return 1;
+		case 15:
+			return 2;
+		case 20:
+			return 3;
+		case 25:
+			return 4;
+		case 30: 
+			return 5;
+		case 35:
+			return 6;
+		case 40: 
+			return 7;
+		case 45: 
+			return 8;
+		case 50:
+			return 9;
+		case 55: 
+			return 10;
+		case 60:
+			return 11;
+		case 65:
+			return 12;
+		case 70:
+			return 13;
+		case 75:
+			return 14;
+		case 80:
+			return 15;
+		case 85:
+			return 16;
+		case 90:
+			return 17;
+		case 95:
+			return 18;
+		case 100:
+			return 19;
+		case 105:
+			return 20;
+		default:
+			return 0;
+		}
+	}
+	
+	public static void setPlayerMax(OfflinePlayer p) throws SQLException{
+			 PreparedStatement manaUpdate = Secret.getDB().prepareStatement("UPDATE ncmana SET max= ? WHERE player = ?");
+			 manaUpdate.setInt(1, ManabyLvl.getMaxMana(p));
+	         manaUpdate.setString(2, p.getName());
+	         manaUpdate.executeUpdate();
+		}
+	public static int getPlayerMax(OfflinePlayer p) throws SQLException{
+		PreparedStatement ps = Secret.getDB().prepareStatement("SELECT max FROM ncmana WHERE player = '"  + p.getName() + "';");
+		ps.executeQuery();
+		ResultSet r = ps.getResultSet();
+		
+		if(r.next()){
+			int max = r.getInt("max");
+			return max;
+		}else{
+		return 0;
+		}
+	}
+			
+	}
+
