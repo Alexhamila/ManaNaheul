@@ -8,11 +8,12 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import me.alexandreh.fr.mananaheul.Main;
+import me.alexandreh.fr.mananaheul.mana.ManaSetup;
 import me.alexandreh.fr.mananaheul.mysql.Secret;
 
 public interface ManabyLvl {
 
-	public static int getMaxMana(OfflinePlayer p) throws SQLException{
+	public static int getMaxMana(String p) throws SQLException{
 		
 		int lvl = LvlRetriever.GetPlayerLvl(p);
 		
@@ -66,9 +67,9 @@ public interface ManabyLvl {
 		
 	}
 	
-	public static int getLvlbyMana(OfflinePlayer p) throws SQLException{
+	public static int getLvlbyMana(String p) throws SQLException{
 		
-		int mana = Main.mana.get(p);
+		int mana = ManaSetup.mana.get(p);
 		
 		switch(mana){
 		
@@ -120,7 +121,7 @@ public interface ManabyLvl {
 		
 	}
 	
-	public static int getLvlbyManaConverter(OfflinePlayer p) throws SQLException{
+	public static int getLvlbyManaConverter(String p) throws SQLException{
 		
 		int mana = ManabyLvl.getPlayerMax(p);
 		
@@ -173,14 +174,14 @@ public interface ManabyLvl {
 		}
 	}
 	
-	public static void setPlayerMax(OfflinePlayer p) throws SQLException{
+	public static void setPlayerMax(String p) throws SQLException{
 			 PreparedStatement manaUpdate = Secret.getDB().prepareStatement("UPDATE ncmana SET max= ? WHERE player = ?");
 			 manaUpdate.setInt(1, ManabyLvl.getMaxMana(p));
-	         manaUpdate.setString(2, p.getName());
+	         manaUpdate.setString(2, p);
 	         manaUpdate.executeUpdate();
 		}
-	public static int getPlayerMax(OfflinePlayer p) throws SQLException{
-		PreparedStatement ps = Secret.getDB().prepareStatement("SELECT max FROM ncmana WHERE player = '"  + p.getName() + "';");
+	public static int getPlayerMax(String p) throws SQLException{
+		PreparedStatement ps = Secret.getDB().prepareStatement("SELECT max FROM ncmana WHERE player = '"  + p + "';");
 		ps.executeQuery();
 		ResultSet r = ps.getResultSet();
 		

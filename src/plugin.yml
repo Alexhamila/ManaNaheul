@@ -1,6 +1,6 @@
 main: me.alexandreh.fr.mananaheul.Main
 name: Mana NaheulCraft
 version: 1.0.0
-description: Plugin par Thris
+description: Plugin de Mana par Thris 
 commands:
-    mana:
+    xp:

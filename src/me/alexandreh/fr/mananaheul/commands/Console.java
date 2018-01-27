@@ -7,31 +7,30 @@ import org.bukkit.entity.Player;
 
 import me.alexandreh.fr.mananaheul.Main;
 import me.alexandreh.fr.mananaheul.levels.ManabyLvl;
+import me.alexandreh.fr.mananaheul.mana.ManaSetup;
 
 public class Console {
 	
-	public static void RemoveMana(CommandSender s, Player p, int remove_mana) throws SQLException{
-		int p_mana = GetMana(p);
-		if(p_mana >= remove_mana){
-		}else{
-			s.sendMessage(p.getName() + " n'a pas assez de mana ("+p_mana + "/" + remove_mana + ")");
-		}
-	}
-	public static void AddMana(Player p, int mana){
-	
-		Main.mana.put(p, Main.mana.get(p) + mana);
-	
+
+	public static void setMana(Player p){
+		ManaSetup.mana.put(p.getName(), p.getLevel());
 	}
 
 	public static int GetMana(Player p) throws SQLException{
-		if(Main.mana.containsKey(p) != true){
-			Main.mana.put(p, ManabyLvl.getMaxMana(p));
-			return ManabyLvl.getMaxMana(p);
-		}else if(Main.mana.containsKey(p)){	
-			return Main.mana.get(p);
-		}else{
+		boolean exists;
+		
+		for(String str : ManaSetup.mana.keySet()){
+			if(str.equals(p.getName())){
+				exists = true;
+				return ManaSetup.mana.get(p.getName());
+			}
+		}
+		if(exists = false){
+			ManaSetup.mana.put(p.getName(), ManabyLvl.getMaxMana(p.getName()));
+			return ManabyLvl.getMaxMana(p.getName());
+		}
+		exists = false;
 		return 0;
 		}
-	}
-	
 }
+	

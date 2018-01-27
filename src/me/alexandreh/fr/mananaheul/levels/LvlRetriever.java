@@ -14,9 +14,9 @@ import java.util.logging.Logger;
 
 public class LvlRetriever {
 
-	public static int GetPlayerLvl(OfflinePlayer p) throws SQLException{
+	public static int GetPlayerLvl(String p) throws SQLException{
 		
-		PreparedStatement ps = Secret.getDB().prepareStatement("SELECT lvl FROM nclevels WHERE player = '"  + p.getName() + "';");
+		PreparedStatement ps = Secret.getDB().prepareStatement("SELECT lvl FROM nclevels WHERE player = '"  + p + "';");
 		ps.executeQuery();
 		ResultSet r = ps.getResultSet();
 		

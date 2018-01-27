@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -13,15 +14,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.alexandreh.fr.mananaheul.commands.ManaCommand;
 import me.alexandreh.fr.mananaheul.mana.ManaSetup;
+import me.alexandreh.fr.mananaheul.mana.Restore;
 import me.alexandreh.fr.mananaheul.mysql.Secret;
 
 
 public class Main extends JavaPlugin {
 	
-	public Plugin plugin;
+
+	public static Plugin plugin;
 	public FileConfiguration config;
-	public static HashMap<OfflinePlayer, Integer> mana = new HashMap<OfflinePlayer, Integer>();
-	
+
 	@Override
 	public void onEnable() {
 		getLogger().info(" ON!");
@@ -37,6 +39,7 @@ public class Main extends JavaPlugin {
 		e.printStackTrace();
 		Bukkit.getLogger().warning("Connection failed !");	
 		}
+	    Restore.RunTimer();
 	    }
 	
 	@Override
@@ -55,7 +58,7 @@ public class Main extends JavaPlugin {
 	}
 	
 	public void registerCommands(){
-		getCommand("mana").setExecutor(new ManaCommand());
+		getCommand("xp").setExecutor(new ManaCommand());
 	}
 }
 	

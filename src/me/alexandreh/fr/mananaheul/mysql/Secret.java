@@ -9,11 +9,13 @@ import org.bukkit.Bukkit;
 import net.md_5.bungee.api.ChatColor;
 
 public class Secret {
-	  private static String host = "";
-	  private static String port = "3306";
-	  private static String database = "";
-	  private static String username = "test";
-	  private static String password = "";
+	  
+	  // Modif //
+	  private static String host = "**.**.**.*";
+	  private static String port = "****";
+	  private static String database = "****";
+	  private static String username = "***";
+	  private static String password = "************";
 	  private static Connection db;
 
 	  
@@ -28,7 +30,7 @@ public class Secret {
 	    if (!isConnected())
 	    {
 	      db = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true&useUnicode=yes", username, password);
-	      Bukkit.getLogger().info(ChatColor.GREEN + "Mana connecting to DB !");
+	      Bukkit.getLogger().info(ChatColor.GREEN + "XP connecting to DB !");
 	    }
 	  }
 	  
@@ -38,7 +40,7 @@ public class Secret {
 	    if (isConnected())
 	    {
 	      db.close();
-	      Bukkit.getLogger().info(ChatColor.RED + "Mana is disconnecting of DB");
+	      Bukkit.getLogger().info(ChatColor.RED + "XP is disconnecting of DB");
 	    }
 	  }
 	  
